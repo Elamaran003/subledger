@@ -1,0 +1,22 @@
+from datetime import date, datetime
+
+from pydantic import BaseModel, ConfigDict
+
+from app.models.enums import SubscriptionStatus
+
+
+class SubscriptionCreate(BaseModel):
+    customer_id: int
+    plan_id: int
+
+
+class SubscriptionRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    customer_id: int
+    plan_id: int
+    status: SubscriptionStatus
+    start_date: date
+    cancelled_at: datetime | None
+    created_at: datetime
